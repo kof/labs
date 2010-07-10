@@ -1,5 +1,14 @@
 /**
- * One method to define typeof variable on crossbrowser manner and much more ...
+ * One method to define the type of a variable on crossbrowser manner and much more ...
+ * 
+ * Usage:
+ * 
+ * typeOf(123, "number"); // true
+ * typeOf(123) === "number"; // true
+ * typeOf(document, "object"); // true
+ * typeOf(document, "plainObject"); // false
+ * typeOf({}, "plainObject"); // true
+ * typeOf({}, "emptyObject"); // true
  * 
  * @version 0.1
  * @license Dual licensed under the MIT and GPL licenses.
@@ -11,31 +20,31 @@
         toString = Object.prototype.toString;
 
     var types = {
-            '[object Array]': 'array',
-            '[object Object]': 'object',
-            '[object Function]': 'function',
-            '[object Boolean]': 'boolean',
-            '[object String]': 'string',
-            '[object Number]': 'number'
+            "[object Array]": "array",
+            "[object Object]": "object",
+            "[object Function]": "function"
         };
         
     function typeOf( obj, expectedType ) {
         var type;
-
+        
+        // speeed up it for null and undefined
         if ( obj === undefined ) {
-            type = 'undefined';
+            type = "undefined";
         } else if ( obj === null ) {
-            type = 'object';
+            type = "object";
         } else {
-            type = types[toString.call(obj)];
+            // use typeof for all other types
+            type = types[toString.call(obj)] || typeof obj;
         }
 
-        if ( type === 'object' && expectedType ) {
+        if ( type === "object" && expectedType ) {
+            
             // this is original jquery implementation of plain object detection
-            if ( expectedType === 'plainObject' ) {
+            if ( expectedType === "plainObject" ) {
                 // Must be an Object.
                 // Because of IE, we also have to check the presence of the constructor property.
-                // Make sure that DOM nodes and window objects don't pass through, as well
+                // Make sure that DOM nodes and window objects don"t pass through, as well
                 if ( obj.nodeType || obj.setInterval ) {
                     return false;
                 }
@@ -54,12 +63,13 @@
                 
                 return key === undefined || hasOwnProperty.call( obj, key );
 
-            } else if ( expectedType === 'emptyObject' ) {
+            } else if ( expectedType === "emptyObject" ) {
                 for ( var name in obj ) {
                     return false;
                 }
                 return true;
             }
+            
         }
       
         return expectedType === undefined ? type : type === expectedType;
