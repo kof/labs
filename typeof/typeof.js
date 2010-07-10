@@ -23,7 +23,6 @@
             "string": true,
             "number": true,
             "boolean": true,
-            "undefined": true,
             "object": true
         },
         types2 = {
