@@ -35,8 +35,11 @@
     function typeOf( obj, expectedType ) {
         var type;
         
+        // fast detection for null and undefined
         if ( obj === null ) {
             type = "object";
+        } else if ( obj === undefined ) {
+            type = "undefined";    
         } else {
             type = typeof obj;
             // only use toString call if its buggy type
