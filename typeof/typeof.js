@@ -9,6 +9,8 @@
  * typeOf(document, "plainObject"); // false
  * typeOf({}, "plainObject"); // true
  * typeOf({}, "emptyObject"); // true
+ * typeof(new Date, "date"); // true
+ * typeof( new RegExp, "regexp"); //true
  * 
  * @version 0.1
  * @license Dual licensed under the MIT and GPL licenses.
@@ -28,7 +30,8 @@
         types2 = {
             "[object Array]": "array",
             "[object Object]": "object",
-            "[object Function]": "function"
+            "[object RegExp]": "regexp",
+            "[object Date]": "date"
         };
         
     function typeOf( obj, expectedType ) {
@@ -77,6 +80,8 @@
                     return false;
                 }
                 return true;
+            } else if ( expectedType === "regexp" || expectedType === "date" ) {
+                return types2[toString.call(obj)] === expectedType;    
             }
             
         }
