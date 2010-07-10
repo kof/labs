@@ -19,7 +19,14 @@
     var hasOwnProperty = window.hasOwnProperty,
         toString = Object.prototype.toString;
 
-    var types = {
+    var types1 = {
+            "string": true,
+            "number": true,
+            "boolean": true,
+            "undefined": true,
+            "object": true
+        },
+        types2 = {
             "[object Array]": "array",
             "[object Object]": "object",
             "[object Function]": "function"
@@ -28,16 +35,16 @@
     function typeOf( obj, expectedType ) {
         var type;
         
-        // speeed up it for null and undefined
-        if ( obj === undefined ) {
-            type = "undefined";
-        } else if ( obj === null ) {
+        if ( obj === null ) {
             type = "object";
         } else {
-            // use typeof for all other types
-            type = types[toString.call(obj)] || typeof obj;
+            type = typeof obj;
+            // only use toString call if its buggy type
+            if ( !types1[type] ) {
+                type = types2[toString.call(obj)];        
+            }
         }
-
+        
         if ( type === "object" && expectedType ) {
             
             // this is original jquery implementation of plain object detection
@@ -45,7 +52,7 @@
                 // Must be an Object.
                 // Because of IE, we also have to check the presence of the constructor property.
                 // Make sure that DOM nodes and window objects don"t pass through, as well
-                if ( obj.nodeType || obj.setInterval ) {
+                if ( obj.nodeType || obj.setInterval || !types2[toString.call(obj)] ) {
                     return false;
                 }
                 
