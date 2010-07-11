@@ -10,7 +10,10 @@
  * typeOf({}, "plainObject"); // true
  * typeOf({}, "emptyObject"); // true
  * typeof(new Date, "date"); // true
+ * typeof(new Date, "object"); // true 
  * typeof( new RegExp, "regexp"); //true
+ * typeof( new RegExp, "object"); //true
+ * typeof( new RegExp) === "object"; //true
  * 
  * @version 0.1
  * @license Dual licensed under the MIT and GPL licenses.
