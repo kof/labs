@@ -9,11 +9,11 @@
  * typeOf(document, "plainObject"); // false
  * typeOf({}, "plainObject"); // true
  * typeOf({}, "emptyObject"); // true
- * typeof(new Date, "date"); // true
- * typeof(new Date, "object"); // true 
- * typeof( new RegExp, "regexp"); //true
- * typeof( new RegExp, "object"); //true
- * typeof( new RegExp) === "object"; //true
+ * typeOf(new Date, "date"); // true
+ * typeOf(new Date, "object"); // true 
+ * typeOf( new RegExp, "regexp"); //true
+ * typeOf( new RegExp, "object"); //true
+ * typeOf( new RegExp) === "object"; //true
  * 
  * @version 0.1
  * @license Dual licensed under the MIT and GPL licenses.
