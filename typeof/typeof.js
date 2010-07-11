@@ -1,5 +1,7 @@
 /**
- * One method to define the type of a variable on crossbrowser manner and much more ...
+ * Superfast crossbrowser implementation of "typeof" with some extras 
+ * like plainObject, emptyObject, date and regexp.
+ * 
  * 
  * Usage:
  * 
@@ -23,13 +25,15 @@
 (function( global, window, undefined ){
     var hasOwnProperty = window.hasOwnProperty,
         toString = Object.prototype.toString;
-
+        
+        // types that work with "typeof"
     var types1 = {
             "string": true,
             "number": true,
             "boolean": true,
             "object": true
         },
+        // types that need extra attention in different cases
         types2 = {
             "[object Function]": "function",
             "[object Array]": "array",
@@ -80,16 +84,21 @@
                 return key === undefined || hasOwnProperty.call( obj, key );
 
             } else if ( expectedType === "emptyObject" ) {
+                
                 for ( var name in obj ) {
                     return false;
                 }
                 return true;
+
             } else if ( expectedType === "regexp" || expectedType === "date" ) {
-                return types2[toString.call(obj)] === expectedType;    
+                
+                return types2[toString.call(obj)] === expectedType;
+                    
             }
             
         }
       
+        // if expected type was passed compare them, else return the type
         return expectedType === undefined ? type : type === expectedType;
     }
     
