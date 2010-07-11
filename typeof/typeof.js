@@ -31,6 +31,7 @@
             "object": true
         },
         types2 = {
+            "[object Function]": "function",
             "[object Array]": "array",
             "[object Object]": "object",
             "[object RegExp]": "regexp",
