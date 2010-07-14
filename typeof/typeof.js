@@ -31,7 +31,7 @@
             "string": true,
             "number": true,
             "boolean": true,
-            "object": true
+            "array": true
         },
         // types that need extra attention in different cases
         types2 = {
