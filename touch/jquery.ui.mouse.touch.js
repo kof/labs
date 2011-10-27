@@ -2,7 +2,7 @@
  * A bridge between iPad and iPhone touch events and jquery draggable, sortable etc. mouse interactions.
  * @author Oleg Slobodskoi  
  */
-/iPad|iPhone/.test( navigator.userAgent ) && (function( $ ) {
+/iPad|iPhone|iPod/.test( navigator.userAgent ) && (function( $ ) {
     
     var proto =  $.ui.mouse.prototype,
         _mouseInit = proto._mouseInit;
@@ -27,6 +27,8 @@
             this._modifyEvent( event );
 
             this._mouseDown( event );
+
+            this._mouseMove( event );
 
             return false;           
         },
